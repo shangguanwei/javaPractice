@@ -31,37 +31,48 @@ public class StudentDemo {
 		stuArr.add(stu2);
 		stuArr.add(stu3);
 		
-		System.out.println("---学生管理系统---");
-		System.out.println("1.查看所有学生");
-		System.out.println("2.增加学生");
-		System.out.println("3.删除学生");
-		System.out.println("4.修改学生");
-		System.out.println("5.退出");
-		System.out.println("请输入：");
-		Scanner sc = new Scanner(System.in);
-		String choice = sc.nextLine();
-		switch (choice) {
-		case "1":
-			findAllStudent(stuArr);
-			break;
-		case "2":
-			addStudent(stuArr);
-			break;
-		case "3":
-			break;
-		case "4":
-			break;
-		case "5":
-			break;
-		default:
-			System.out.println("输入有误，系统已退出");
-			System.exit(0);
-			break;
+		while(true) {
+			System.out.println("---学生管理系统---");
+			System.out.println("1.查看所有学生");
+			System.out.println("2.增加学生");
+			System.out.println("3.删除学生");
+			System.out.println("4.修改学生");
+			System.out.println("5.退出");
+			System.out.println("请输入：");
+			Scanner sc = new Scanner(System.in);
+			String choice = sc.nextLine();
+			switch (choice) {
+			case "1":
+				findAllStudent(stuArr);
+				break;
+			case "2":
+				addStudent(stuArr);
+				break;
+			case "3":
+				removeStudent(stuArr);
+				break;
+			case "4":
+				changeStudent(stuArr);
+				break;
+			case "5":
+				System.exit(0);
+				break;
+			default:
+				System.out.println("输入有误，系统已退出");
+				System.exit(0);
+				break;
+			}
 		}
 				
 	}
 	
 	public static void findAllStudent(ArrayList<Student> stuArr) {
+		if(stuArr.size() == 0) {
+			System.out.println("当前系统没有学生");
+			//没有学生的话直接退出
+			return;
+		}
+		
 		for(int i=0;i<stuArr.size();i++) {
 			Student s = stuArr.get(i);
 			System.out.println(s.name()+" "+s.age());
@@ -70,39 +81,108 @@ public class StudentDemo {
 	}
 	
 	public static void addStudent(ArrayList<Student> stuArr) {
-		Scanner sc = new Scanner(System.in);
+		Scanner sc;
+		String nameStr = "";
 		System.out.println("请输入姓名：");
-		String nameStr = sc.nextLine();
-		if(nameStr.length()<10) {
-			System.out.println("已录入");
-		} else {
-			System.out.println("长度限制，请重输");
-			nameStr = sc.nextLine();
+		//循环输入
+		while(true) {
+			sc = new Scanner(System.in);
+			try {
+				nameStr = sc.nextLine();
+				if(nameStr.length()>10) throw new Exception();
+			} catch (Exception e){
+				System.out.println("姓名长度在10字符以内，请重输：");
+				continue;
+			}
+			break;
 		}
 		
+		int age;
 		System.out.println("请输入年龄：");
-		int age = sc.nextInt();
-		if(age>0 && age<200) {
-			System.out.println("已录入");
-		} else {
-			System.out.println("长度限制，请重输");
-			age = sc.nextInt();
+		while(true) {
+			sc = new Scanner(System.in);
+			try {
+				age = sc.nextInt();
+				if(age<0 || age>200) throw new Exception();
+			} catch (Exception e){
+				System.out.println("年龄在0-200之间，请重输：");
+				continue;
+			}
+			break;
 		}
 		
 		Student newStu = new Student(nameStr,age);
 		stuArr.add(newStu);
 	}
 	
-	public static void moveStudent(ArrayList<Student> stuArr) {
+	public static void removeStudent(ArrayList<Student> stuArr) {
 		System.out.println("请输入要删除第几个学生");
-		Scanner sc = new Scanner(System.in);
-		int x = sc.nextInt();
-		if(x<stuArr.size()) {
-			stuArr.remove(x--);
-		} else {
-			System.out.println("输入列数有误！请重输");
-			x = sc.nextInt();
+		Scanner sc;
+		int x;
+		//循环输入
+		while(true) {
+			sc = new Scanner(System.in);
+			try {
+				x = sc.nextInt();
+				if(x>stuArr.size()) throw new Exception();
+			} catch (Exception e){
+				System.out.println("请输入"+stuArr.size()+"以内的正整数：");
+				continue;
+			}
+			break;
 		}
+		stuArr.remove(--x);
+		
+	}
+	
+	public static void changeStudent(ArrayList<Student> stuArr) {
+		
+		Scanner sc;
+		int num;
+		System.out.println("请输入要修改学生所在序列");
+		while(true) {
+			sc = new Scanner(System.in);
+			try {
+				num = sc.nextInt();
+				if(num>stuArr.size()) throw new Exception();
+			} catch (Exception e){
+				System.out.println("请输入"+stuArr.size()+"以内的正整数：");
+				continue;
+			}
+			break;
+		}
+		
+		System.out.println("请输入姓名：");
+		String nameStr;
+		while(true) {
+			sc = new Scanner(System.in);
+			try {
+				nameStr = sc.nextLine();
+				if(nameStr.length()>10) throw new Exception();
+			} catch (Exception e){
+				System.out.println("长度限制10字符以内：");
+				continue;
+			}
+			break;
+		}
+		
+		int age;
+		System.out.println("请输入年龄：");
+		while(true) {
+			sc = new Scanner(System.in);
+			try {
+				age = sc.nextInt();
+				if(age<0 || age>200) throw new Exception();
+			} catch (Exception e){
+				System.out.println("请输入200以内的正整数：");
+				continue;
+			}
+			break;
+		}
+		
+		Student newStu = new Student(nameStr,age);
+		stuArr.set(num--, newStu);
+		
 	}
 
 }
