@@ -5,6 +5,10 @@ import java.io.*;
 
 public class StudentDemo {
 	public static void main(String[] args) throws IOException  {
+		//静态方法、静态成员
+		Student.graduateFrom = "zhejiangdaxue";
+		Student.eat();
+		
 		Student stu1 = new Student();
 //		System.out.println("stu1-name:"+stu1.name()+" stu1-age:"+stu1.age());
 		stu1.setAge(26);

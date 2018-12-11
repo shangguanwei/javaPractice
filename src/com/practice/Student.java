@@ -11,6 +11,7 @@ public class Student {
 
 	private int age;
 	private String name;
+	static String graduateFrom;
 	
 	//	构造方法 格式
 	//	a:方法名与类名相同
@@ -41,6 +42,10 @@ public class Student {
 	
 	public String name() {
 		return name;
+	}
+	
+	public static void eat() {
+		System.out.println("eat");
 	}
 
 }
