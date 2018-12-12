@@ -40,7 +40,8 @@ public class StudentDemo {
 		String descFile = "desc.txt";
 		method1(srcFile,descFile);
 		
-		
+		System.out.println("输出学生1："+stu1);
+		System.out.println("toString()方法输出学生1："+stu1.toString());
 		
 		while(true) {
 			System.out.println("---学生管理系统---");

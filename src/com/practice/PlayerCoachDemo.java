@@ -34,6 +34,7 @@ public class PlayerCoachDemo {
 		Player per3 = new BasketBallPlayer();
 		per3.study();
 		per3.eat();
+		
 	}
 
 }

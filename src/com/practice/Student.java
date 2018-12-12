@@ -1,6 +1,7 @@
 package com.practice;
 
-public class Student {
+//Object类是所有类的父类
+public class Student extends Object {
 	//成员变量
 	/*private关键字：
 	a:是一个权限修饰符。
@@ -46,6 +47,12 @@ public class Student {
 	
 	public static void eat() {
 		System.out.println("eat");
+	}
+	
+	//重写Object toString方法
+	@Override
+	public String toString() {
+		return "Student name:"+name+" Student age"+age;
 	}
 
 }
