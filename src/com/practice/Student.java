@@ -54,5 +54,32 @@ public class Student extends Object {
 	public String toString() {
 		return "Student name:"+name+" Student age"+age;
 	}
+	
+//	@Override
+//	public boolean equals(Object obj) {
+//		//向下转型
+//		Student s = (Student)obj;
+//		if(!this.name.equals(s.name)) {
+//			System.out.println("姓名不等");
+//			return false;
+//		}
+//		
+//		if(this.age != s.age) {
+//			System.out.println("年龄不等");
+//			return false;
+//		}
+//		
+//		System.out.println("相等");
+//		return true;
+//	}
+//	
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + age;
+//		result = prime * result + ((name == null) ? 0 : name.hashCode());
+//		return result;
+//	}
 
 }
